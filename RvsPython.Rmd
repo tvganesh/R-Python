@@ -1,0 +1,172 @@
+---
+title: "R vs  Python: Different similarities and similar differences"
+author: "Tinniam V Ganesh"
+date: "May 18, 2017"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## R versus Python 
+As to whic language is mosr suitd for Datascience and Analysis, there has been a lot of debate with
+people tending to get quitre dear to them. This post will look at some of the similarities and differences
+To a large extent bothR an Python do the same thing in just slightly different ways and syntaxes. The ease or the difficulty in the R/Pythin construct is in the 'eyes of the beholder nay, progeammer' O would say.\
+
+- R has the type vector which in Python is closely related to a list
+- To know the type of the variable we use the following for R and Python
+- R & Python use length & len respectively to get the length of a vector and list respectively
+
+# R Vector vs Python List
+```{r}
+# R vectors
+a<-c(4,5,1,3,4,5)
+print(a[3])
+print(a[3:4]) # R does not always need the explicit print. 
+#R type of variable
+print(class(a))
+# Length of a
+print(length(a))
+```
+
+```{python}
+# Python lists
+a=[4,5,1,3,4,5] # 
+print(a[2]) # Some python IDEs require the explicit print
+print(a[2:5])
+print(type(a))
+# Length of a
+print(len(a))
+```
+
+Python also has certain other data types like the tuple, dictionary etc as shown below. R does not have as many of the data types, nevertheless we can do everything that Python does in R
+
+```{python}
+# Python tuple
+b = (4,5,7,8)
+print(b)
+
+
+#Python dictionary
+c={'name':'Ganesh','age':54,'Work':'Professional'}
+print(c)
+#Print type of variable c
+
+```
+
+
+###2.Variable type
+To know the type of the variable in R we use 'class'
+
+```{r}
+#R - Type of variable
+a<-c(4,5,1,3,4,5)
+print(class(a))
+
+```
+
+```{python}
+#Python - Print type of tuple a
+a=[4,5,1,3,4,5]
+print(type(a))
+b=(4,3,"the",2)
+print(type(b))
+```
+
+###3 Length 
+To know length in R, use length()
+```{r}
+#R - Length of vector
+# Length of a
+a<-c(4,5,1,3,4,5)
+print(length(a))
+```
+
+To know the length of a list,tuple or dict we can use
+```{python}
+# Python - Length of list , tuple etc
+# Length of a
+a=[4,5,1,3,4,5]
+print(len(a))
+# Length of b
+b = (4,5,7,8)
+print(len(b))
+
+```
+
+
+###4. Accessing help
+
+To access help in R we use the '?' or the 'help' function 
+```{r}
+#R - Help - To be done in R console or RStudio
+#?sapply
+#help(sapply)
+```
+
+Help in python on any topic involves
+```{python}
+#Python help - This can be done on a (I)Python console
+#help(len)
+#?len
+```
+
+###5. Subsetting
+The key difference between R and Python with regards to subsetting is that in R the index starts at 1. In Python it starts at 0, much like C,C++ or Java
+To subset a vector in R we use
+```{r}
+#R - Subset
+a<-c(4,5,1,3,4,8,12,18,1)
+print(a[3])
+
+# To print a range or a slice. Print from the 3rd to the 5th element
+print(a[3:6])
+```
+
+```{python}
+#Python - Subset
+a=[4,5,1,3,4,8,12,18,1]
+# Print the 4th element (starts from 0)
+print(a[3])
+
+# Print a slice from 4 to 6th element
+print(a[3:6])
+```
+
+###4. Operations on vectors in R and operation on lists in Python
+In R we can do many operations on vectors for e.g. element by element addition, subtraction,
+exponentation,product etc. as show
+```{r}
+#R - Operations on vectors
+a<- c(5,2,3,1,7)
+b<- c(1,5,4,6,8)
+
+#Element wise Addition
+print(a+b)
+#Element wise subtraction
+print(a-b)
+#Element wise product
+print(a*b)
+# Exponentiating the elements of a vector
+print(a^2)
+```
+
+In Python to do this on lists we need to use the 'map' and the 'lambda' function as follows
+```{python}
+# Python - Operations on list
+a =[5,2,3,1,7]
+b =[1,5,4,6,8]
+
+#Element wise addition with map & lambda
+print(map(lambda x,y: x+y,a,b))
+#Element wise subtraction
+print(map(lambda x,y: x-y,a,b))
+#Element wise product
+print(map(lambda x,y: x*y,a,b))
+# Exponentiating the elements of a list
+print(map(lambda x: x**2,a))
+
+
+```
+
