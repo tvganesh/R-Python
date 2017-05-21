@@ -396,3 +396,41 @@ print(iris['sepal length (cm)'].mean())
 print(iris['sepal width (cm)'].std())
 ```
 
+####i Boxplot
+Boxplot can be produced in R using baseplot
+```{r cache=TRUE}
+#R
+boxplot(iris$lengthOfSepal)
+```
+
+Matplotlib is a popular package in Python for plots
+```{python cache=TRUE}
+import sklearn as sklearn
+import pandas as pd
+import matplotlib.pyplot as plt
+from sklearn import datasets
+data = datasets.load_iris()
+# Convert to Pandas dataframe
+iris = pd.DataFrame(data.data, columns=data.feature_names)
+import matplotlib.pyplot as plt
+img=plt.boxplot(iris['sepal length (cm)'])
+plt.imshow(img)
+```
+
+####j. Scatter plot
+```{r cache=TRUE}
+plot(iris$widthOfSepal,iris$lengthOfSepal)
+```
+
+```{python cache=TRUE}
+import matplotlib.pyplot as plt
+import sklearn as sklearn
+import pandas as pd
+from sklearn import datasets
+data = datasets.load_iris()
+# Convert to Pandas dataframe
+iris = pd.DataFrame(data.data, columns=data.feature_names)
+img=plt.scatter(iris['sepal width (cm)'],iris['sepal length (cm)'])
+plt.imshow(img)
+```
+
