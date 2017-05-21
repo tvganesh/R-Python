@@ -19,7 +19,7 @@ To a large extent bothR an Python do the same thing in just slightly different w
 - R & Python use length & len respectively to get the length of a vector and list respectively
 
 # R Vector vs Python List
-```{r}
+```{r cache=TRUE}
 # R vectors
 a<-c(4,5,1,3,4,5)
 print(a[3])
@@ -30,7 +30,7 @@ print(class(a))
 print(length(a))
 ```
 
-```{python}
+```{python cache=TRUE}
 # Python lists
 a=[4,5,1,3,4,5] # 
 print(a[2]) # Some python IDEs require the explicit print
@@ -42,7 +42,7 @@ print(len(a))
 
 Python also has certain other data types like the tuple, dictionary etc as shown below. R does not have as many of the data types, nevertheless we can do everything that Python does in R
 
-```{python}
+```{python cache=TRUE}
 # Python tuple
 b = (4,5,7,8)
 print(b)
@@ -59,14 +59,14 @@ print(c)
 ###2.Variable type
 To know the type of the variable in R we use 'class'
 
-```{r}
+```{r cache=TRUE}
 #R - Type of variable
 a<-c(4,5,1,3,4,5)
 print(class(a))
 
 ```
 
-```{python}
+```{python cache=TRUE}
 #Python - Print type of tuple a
 a=[4,5,1,3,4,5]
 print(type(a))
@@ -76,7 +76,7 @@ print(type(b))
 
 ###3 Length 
 To know length in R, use length()
-```{r}
+```{r cache=TRUE}
 #R - Length of vector
 # Length of a
 a<-c(4,5,1,3,4,5)
@@ -84,7 +84,7 @@ print(length(a))
 ```
 
 To know the length of a list,tuple or dict we can use
-```{python}
+```{python cache=TRUE}
 # Python - Length of list , tuple etc
 # Length of a
 a=[4,5,1,3,4,5]
@@ -99,14 +99,14 @@ print(len(b))
 ###4. Accessing help
 
 To access help in R we use the '?' or the 'help' function 
-```{r}
+```{r cache=TRUE}
 #R - Help - To be done in R console or RStudio
 #?sapply
 #help(sapply)
 ```
 
 Help in python on any topic involves
-```{python}
+```{python cache=TRUE}
 #Python help - This can be done on a (I)Python console
 #help(len)
 #?len
@@ -115,7 +115,7 @@ Help in python on any topic involves
 ###5. Subsetting
 The key difference between R and Python with regards to subsetting is that in R the index starts at 1. In Python it starts at 0, much like C,C++ or Java
 To subset a vector in R we use
-```{r}
+```{r cache=TRUE}
 #R - Subset
 a<-c(4,5,1,3,4,8,12,18,1)
 print(a[3])
@@ -124,7 +124,7 @@ print(a[3])
 print(a[3:6])
 ```
 
-```{python}
+```{python cache=TRUE}
 #Python - Subset
 a=[4,5,1,3,4,8,12,18,1]
 # Print the 4th element (starts from 0)
@@ -137,7 +137,7 @@ print(a[3:6])
 ###6. Operations on vectors in R and operation on lists in Python
 In R we can do many operations on vectors for e.g. element by element addition, subtraction,
 exponentation,product etc. as show
-```{r}
+```{r cache=TRUE}
 #R - Operations on vectors
 a<- c(5,2,3,1,7)
 b<- c(1,5,4,6,8)
@@ -153,7 +153,7 @@ print(a^2)
 ```
 
 In Python to do this on lists we need to use the 'map' and the 'lambda' function as follows
-```{python}
+```{python cache=TRUE}
 # Python - Operations on list
 a =[5,2,3,1,7]
 b =[1,5,4,6,8]
@@ -172,7 +172,7 @@ print(map(lambda x: x**2,a))
 
 However if we create ndarrays from lists then we can do the element wise addition,subtraction,product,
 etc. like R. Numpy is really a powerful module with many, many functions for matrix manipulations
-```{python}
+```{python cache=TRUE}
 import numpy as np
 a =[5,2,3,1,7]
 b =[1,5,4,6,8]
@@ -191,14 +191,14 @@ print(a**2)
 
 ###7 Getting the index of element
 To determine the index of an element which satisifies a specific logical condition in R use 'which'. In the code below the index of  element which is equal to 1 is 4
-```{r}
+```{r cache=TRUE}
 # R - Which
 a<- c(5,2,3,1,7)
 print(which(a == 1))
 ```
 
 In Python array we can use np.where to get the same effect. The index will be 3 as the index starts from 0
-```{python}
+```{python cache=TRUE}
 # Python - np.where
 import numpy as np
 a =[5,2,3,1,7]
@@ -209,7 +209,7 @@ print(np.where(a==1))
 ###8. Data frames
 R, by default comes with a set of datasets. There are some datasets which come with the SkiKit- Learn package
 
-```{r}
+```{r cache=TRUE}
 # R 
 # To check built datasets use
 #data() - In R console or in R Studio
@@ -218,7 +218,7 @@ R, by default comes with a set of datasets. There are some datasets which come w
 ```
 
 
-```{python}
+```{python cache=TRUE}
 #Python
 import sklearn as sklearn
 import pandas as pd
@@ -238,12 +238,12 @@ The most common operations on a dataframe are
 - Check the content of the dataframe
 
 ####a.Size
-```{r}
+```{r cache=TRUE}
 #R - Size
 dim(iris)
 ```
 
-```{python}
+```{python cache=TRUE}
 #Python - size
 import sklearn as sklearn
 import pandas as pd
@@ -255,13 +255,13 @@ iris.shape
 ```
 
 ####b. Top & bottom 5 rows of dataframe
-```{r}
+```{r cache=TRUE}
 #R 
 head(iris,5)
 tail(iris,5)
 ```
 
-```{python}
+```{python cache=TRUE}
 #Python
 import sklearn as sklearn
 import pandas as pd
@@ -274,13 +274,21 @@ print(iris.tail(5))
 ```
 
 ####c. Check the content of the dataframe
-```{r}
+```{r cache=TRUE}
 #R
 summary(iris)
 str(iris)
 ```
 
-```{python}
+####d. Check column names
+```{r cache=TRUE}
+#R
+names(iris)
+colnames(iris)
+```
+
+
+```{python cache=TRUE}
 #Python
 import sklearn as sklearn
 import pandas as pd
@@ -288,16 +296,103 @@ from sklearn import datasets
 data = datasets.load_iris()
 # Convert to Pandas dataframe
 iris = pd.DataFrame(data.data, columns=data.feature_names)
-iris.info()
+#Get column names
+print(iris.columns)
 ```
 
-####d. Subsetting dataframes
-```{r}
+
+####e. Rename columns
+Assign a vector to column names
+```{r cache=TRUE}
+colnames(iris) <- c("lengthOfSepal","widthOfSepal","lengthOfPetal","widthOfPetal","Species")
+colnames(iris)
+```
+
+In Python we can assign a list to df.columns
+```{python cache=TRUE}
+import sklearn as sklearn
+import pandas as pd
+from sklearn import datasets
+data = datasets.load_iris()
+# Convert to Pandas dataframe
+iris = pd.DataFrame(data.data, columns=data.feature_names)
+iris.columns = ["lengthOfSepal","widthOfSepal","lengthOfPetal","widthOfPetal"]
+print(iris.columns)
+```
+
+
+###f.Details of dataframe
+```{python cache=TRUE}
+#Python
+import sklearn as sklearn
+import pandas as pd
+from sklearn import datasets
+data = datasets.load_iris()
+# Convert to Pandas dataframe
+iris = pd.DataFrame(data.data, columns=data.feature_names)
+print(iris.info())
+```
+
+####g. Subsetting dataframes
+```{r cache=TRUE}
 # R
 #To subset a dataframe 'df' in R we use df[row,column] or df[row vector,column vector]
 #df[row,column]
-iris[3.4]
+iris[3,4]
 #df[row vector, column vector]
 iris[2:5,1:3]
+#If we omit the row vector, then it implies all rows or if we omit the column vector
+# then implies all columns for that row
+iris[2:5,]
+# In R we can all specific columns by column names
+iris$Sepal.Length[2:5]
+```
+
+
+```{python cache=TRUE}
+#Python
+# To select an entire row we use .iloc. The index can be used with the ':'. If 
+# .iloc[start row: end row]. If start row is omitted then it implies the beginning of
+# data frame, if end row is omitted then it implies all rows till end
+#Python
+import sklearn as sklearn
+import pandas as pd
+from sklearn import datasets
+data = datasets.load_iris()
+# Convert to Pandas dataframe
+iris = pd.DataFrame(data.data, columns=data.feature_names)
+print(iris.iloc[3])
+print(iris[:5])
+# In python we can select columns by column name as follows
+print(iris['sepal length (cm)'][2:6])
+#If you want to select more than 2 columns then you must use the double '[[]]' since the 
+# index is a list itself
+print(iris[['sepal length (cm)','sepal width (cm)']][4:7])
+```
+
+
+####h Computing Mean, Standard deviation
+```{r cache=TRUE}
+#R 
+#Mean
+mean(iris$lengthOfSepal)
+#Standard deviation
+sd(iris$widthOfSepal)
+
+```
+
+```{python cache=TRUE}
+#Python
+#Mean
+import sklearn as sklearn
+import pandas as pd
+from sklearn import datasets
+data = datasets.load_iris()
+# Convert to Pandas dataframe
+iris = pd.DataFrame(data.data, columns=data.feature_names)
+# Convert to Pandas dataframe
+print(iris['sepal length (cm)'].mean())
+#Standard deviation
+print(iris['sepal width (cm)'].std())
 ```
 
