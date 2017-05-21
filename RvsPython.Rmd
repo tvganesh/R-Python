@@ -213,7 +213,7 @@ R, by default comes with a set of datasets. There are some datasets which come w
 # R 
 # To check built datasets use
 #data() - In R console or in R Studio
-iris
+#iris - Don't print to console
 
 ```
 
@@ -221,8 +221,83 @@ iris
 ```{python}
 #Python
 import sklearn as sklearn
+import pandas as pd
 from sklearn import datasets
-iris = datasets.load_iris()
-iris
+# This creates a Sklearn bunch
+data = datasets.load_iris()
+# Convert to Pandas dataframe
+iris = pd.DataFrame(data.data, columns=data.feature_names)
+```
+
+###9. Working with dataframes
+With R you can work with dataframes directly. For Python we need to use the Pandas package.
+The most common operations on a dataframe are
+
+- Check the size of the dataframe
+- Take a look at the top 5 or bottom 5 rows of dataframe
+- Check the content of the dataframe
+
+####a.Size
+```{r}
+#R - Size
+dim(iris)
+```
+
+```{python}
+#Python - size
+import sklearn as sklearn
+import pandas as pd
+from sklearn import datasets
+data = datasets.load_iris()
+# Convert to Pandas dataframe
+iris = pd.DataFrame(data.data, columns=data.feature_names)
+iris.shape
+```
+
+####b. Top & bottom 5 rows of dataframe
+```{r}
+#R 
+head(iris,5)
+tail(iris,5)
+```
+
+```{python}
+#Python
+import sklearn as sklearn
+import pandas as pd
+from sklearn import datasets
+data = datasets.load_iris()
+# Convert to Pandas dataframe
+iris = pd.DataFrame(data.data, columns=data.feature_names)
+print(iris.head(5))
+print(iris.tail(5))
+```
+
+####c. Check the content of the dataframe
+```{r}
+#R
+summary(iris)
+str(iris)
+```
+
+```{python}
+#Python
+import sklearn as sklearn
+import pandas as pd
+from sklearn import datasets
+data = datasets.load_iris()
+# Convert to Pandas dataframe
+iris = pd.DataFrame(data.data, columns=data.feature_names)
+iris.info()
+```
+
+####d. Subsetting dataframes
+```{r}
+# R
+#To subset a dataframe 'df' in R we use df[row,column] or df[row vector,column vector]
+#df[row,column]
+iris[3.4]
+#df[row vector, column vector]
+iris[2:5,1:3]
 ```
 
