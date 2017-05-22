@@ -10,15 +10,30 @@ knitr::opts_chunk$set(echo = TRUE)
 ```
 
 ## R versus Python 
-As to whic language is mosr suitd for Datascience and Analysis, there has been a lot of debate with
-people tending to get quitre dear to them. This post will look at some of the similarities and differences
-To a large extent bothR an Python do the same thing in just slightly different ways and syntaxes. The ease or the difficulty in the R/Pythin construct is in the 'eyes of the beholder nay, progeammer' O would say.\
+A debate about which  language is better suited for Datascience, R or Python, can set off diehard fans of these languages into a tizzy. This post tries to look at some of the different similarities and similar differences between these languages. To a large extent the ease or difficulty in learning R or Python is subjective. I have heard that R has a steeper learning curve than Python and also vice versa. This probably depends on the degree of familiarity with the languuge
+To a large extent both R an Python do the same thing in just slightly different ways and syntaxes. The ease or the difficulty in the R/Python construct's largely is in the 'eyes of the beholder' nay, programmer' we could say. I include my own experience with the languages below.
+
+###1. R data types
+R has 2 data types
+
+a) Character 
+b) Numeric
+
+Python has several data types
+
+a) Int
+b) float
+c) Long
+d) Complex
+and so on
 
 - R has the type vector which in Python is closely related to a list
 - To know the type of the variable we use the following for R and Python
 - R & Python use length & len respectively to get the length of a vector and list respectively
 
-# R Vector vs Python List
+###2. R Vector vs Python List
+A common data type in R is the vector. Python has a similar data type, the list
+
 ```{r cache=TRUE}
 # R vectors
 a<-c(4,5,1,3,4,5)
@@ -40,6 +55,7 @@ print(type(a))
 print(len(a))
 ```
 
+###2a. Other data types - Python
 Python also has certain other data types like the tuple, dictionary etc as shown below. R does not have as many of the data types, nevertheless we can do everything that Python does in R
 
 ```{python cache=TRUE}
@@ -56,8 +72,9 @@ print(c)
 ```
 
 
-###2.Variable type
-To know the type of the variable in R we use 'class'
+###2.Type of Variable 
+To know the type of the variable in R we use 'class', In Python the corresponding command
+is 'type'
 
 ```{r cache=TRUE}
 #R - Type of variable
@@ -74,7 +91,7 @@ b=(4,3,"the",2)
 print(type(b))
 ```
 
-###3 Length 
+###3. Length 
 To know length in R, use length()
 ```{r cache=TRUE}
 #R - Length of vector
@@ -83,7 +100,7 @@ a<-c(4,5,1,3,4,5)
 print(length(a))
 ```
 
-To know the length of a list,tuple or dict we can use
+To know the length of a list,tuple or dict we can use len()
 ```{python cache=TRUE}
 # Python - Length of list , tuple etc
 # Length of a
@@ -124,6 +141,7 @@ print(a[3])
 print(a[3:6])
 ```
 
+Python also uses indices. The difference in Python is that the index starts from 0/
 ```{python cache=TRUE}
 #Python - Subset
 a=[4,5,1,3,4,8,12,18,1]
@@ -153,25 +171,24 @@ print(a^2)
 ```
 
 In Python to do this on lists we need to use the 'map' and the 'lambda' function as follows
-```{python cache=TRUE}
+```{python }
 # Python - Operations on list
 a =[5,2,3,1,7]
 b =[1,5,4,6,8]
 
 #Element wise addition with map & lambda
-print(map(lambda x,y: x+y,a,b))
+print(list(map(lambda x,y: x+y,a,b)))
 #Element wise subtraction
-print(map(lambda x,y: x-y,a,b))
+print(list(map(lambda x,y: x-y,a,b)))
 #Element wise product
-print(map(lambda x,y: x*y,a,b))
+print(list(map(lambda x,y: x*y,a,b)))
 # Exponentiating the elements of a list
-print(map(lambda x: x**2,a))
+print(list(map(lambda x: x**2,a)))
 
 
 ```
 
-However if we create ndarrays from lists then we can do the element wise addition,subtraction,product,
-etc. like R. Numpy is really a powerful module with many, many functions for matrix manipulations
+However if we create ndarrays from lists then we can do the element wise addition,subtraction,product, etc. like R. Numpy is really a powerful module with many, many functions for matrix manipulations
 ```{python cache=TRUE}
 import numpy as np
 a =[5,2,3,1,7]
@@ -189,7 +206,7 @@ print(a**2)
 
 ```
 
-###7 Getting the index of element
+###7. Getting the index of element
 To determine the index of an element which satisifies a specific logical condition in R use 'which'. In the code below the index of  element which is equal to 1 is 4
 ```{r cache=TRUE}
 # R - Which
@@ -207,7 +224,7 @@ print(np.where(a==1))
 ```
 
 ###8. Data frames
-R, by default comes with a set of datasets. There are some datasets which come with the SkiKit- Learn package
+R, by default comes with a set of in-built datasets. There are some datasets which come with the SkiKit- Learn package
 
 ```{r cache=TRUE}
 # R 
@@ -217,7 +234,7 @@ R, by default comes with a set of datasets. There are some datasets which come w
 
 ```
 
-
+We can use the in-built data sets that come with Scikit package
 ```{python cache=TRUE}
 #Python
 import sklearn as sklearn
@@ -230,7 +247,7 @@ iris = pd.DataFrame(data.data, columns=data.feature_names)
 ```
 
 ###9. Working with dataframes
-With R you can work with dataframes directly. For Python we need to use the Pandas package.
+With R you can work with dataframes directly. For more complex dataframe operations in R there are convenient packages like dplyr, reshape2 etc. For Python we need to use the Pandas package. Pandas is quite comprehensive in the list of things we can do with data frames
 The most common operations on a dataframe are
 
 - Check the size of the dataframe
@@ -238,11 +255,12 @@ The most common operations on a dataframe are
 - Check the content of the dataframe
 
 ####a.Size
+In R use dim()
 ```{r cache=TRUE}
 #R - Size
 dim(iris)
 ```
-
+For Python use .shape
 ```{python cache=TRUE}
 #Python - size
 import sklearn as sklearn
@@ -255,6 +273,8 @@ iris.shape
 ```
 
 ####b. Top & bottom 5 rows of dataframe
+To know the top and bottom rows of a data frame we use head() & tail as shown below for R
+and Python
 ```{r cache=TRUE}
 #R 
 head(iris,5)
@@ -280,6 +300,18 @@ summary(iris)
 str(iris)
 ```
 
+
+```{python}
+#Python
+import sklearn as sklearn
+import pandas as pd
+from sklearn import datasets
+data = datasets.load_iris()
+# Convert to Pandas dataframe
+iris = pd.DataFrame(data.data, columns=data.feature_names)
+print(iris.info())
+```
+
 ####d. Check column names
 ```{r cache=TRUE}
 #R
@@ -302,14 +334,14 @@ print(iris.columns)
 
 
 ####e. Rename columns
-Assign a vector to column names
+In R we can assign a vector to column names
 ```{r cache=TRUE}
 #R
 colnames(iris) <- c("lengthOfSepal","widthOfSepal","lengthOfPetal","widthOfPetal","Species")
 colnames(iris)
 ```
 
-In Python we can assign a list to df.columns
+In Python we can assign a list to <df>s.columns
 ```{python cache=TRUE}
 #Python
 import sklearn as sklearn
@@ -373,7 +405,7 @@ print(iris[['sepal length (cm)','sepal width (cm)']][4:7])
 ```
 
 
-####h Computing Mean, Standard deviation
+####h. Computing Mean, Standard deviation
 ```{r cache=TRUE}
 #R 
 #Mean
@@ -398,7 +430,7 @@ print(iris['sepal length (cm)'].mean())
 print(iris['sepal width (cm)'].std())
 ```
 
-####i Boxplot
+####i. Boxplot
 Boxplot can be produced in R using baseplot
 ```{r cache=TRUE}
 #R
@@ -439,7 +471,7 @@ img=plt.scatter(iris['sepal width (cm)'],iris['sepal length (cm)'])
 #plt.show(img)
 ```
 
-#Read from csv file
+####k. Read from csv file
 ```{r cache=TRUE}
 #R
 tendulkar= read.csv("tendulkar.csv",stringsAsFactors = FALSE,na.strings=c(NA,"-"))
@@ -448,6 +480,7 @@ dim(tendulkar)
 names(tendulkar)
 ```
 
+Use pandas.read_csv() for Python
 ```{python cache=TRUE}
 #Python
 import pandas as pd
@@ -456,6 +489,16 @@ tendulkar= pd.read_csv("tendulkar.csv",na_values=["-"])
 print(tendulkar.shape)
 print(tendulkar.columns)
 ```
+
+####l. Clean the dataframe in R and Python. 
+The following steps are done for R and Python
+
+1.Remove rows with 'DNB'
+2.Remove rows with 'TDNB'
+3.Remove rows with absent
+4.Remove the "* indicating not out
+5.Remove incomplete rows with NA for R or NaN in Python
+6.Do a scatter plot
 
 
 ```{r cache=TRUE}
@@ -517,7 +560,13 @@ tendulkar.BF = tendulkar.BF.astype(int)
 plt.scatter(tendulkar.BF,tendulkar.Runs)
 ```
 
-# Chaining operations on dataframes
+####m. Chaining operations on dataframes
+To chain a set of operations we need to use an R package like dplyr. Pandas does this 
+The following operations are done on tendulkar data frame by dplyr for R and Pandas for Python below
+
+1. Group by ground
+2. Compute average runs in each ground
+3. Arrange in descending order
 
 ```{r cache=TRUE}
 #R
@@ -553,3 +602,31 @@ tendulkar1= tendulkar.groupby('Ground').mean()['Runs'].sort_values(ascending=Fal
 print(tendulkar1.head(10))
 ```
 
+###9. Functions
+```{r}
+product <- function(a,b){
+  c<- a*b
+  c
+}
+product(5,7)
+```
+
+```{python}
+def product(a,b):
+  c = a*b
+  return c
+  
+print(product(5,7))
+
+
+```
+
+## Conclusion
+Personally, I took to R, much like a 'duck takes to water'. I found the R syntax very simple and mostly intuitive. R packages like dplyr, ggplot2, reshape2, make the language quite irrestible. R is weakly typed and has only numeric and character types as opposed to the full fledged data types in Python. 
+
+Python, has too many bells and whistles, which can be a little bewildering to the novice. It is possible that they may be useful as one becomes more experienced with the language. Also I found that installing Python packages sometimes gives errors with Python versions 2.7 or 3.6. This will leave you scrambling to google to find how to fix these problems. These can be quite frustrating. R on the other hand makes installing R packages a breeze.
+
+Anyway, this is my current opinion, and like all opinions, may change in the course of time. Let's see!
+
+I may write a follow up post with more advanced features of R and Python. So do keep checking!
+Long live R! Viva la Python!
