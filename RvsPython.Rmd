@@ -414,7 +414,7 @@ data = datasets.load_iris()
 iris = pd.DataFrame(data.data, columns=data.feature_names)
 import matplotlib.pyplot as plt
 img=plt.boxplot(iris['sepal length (cm)'])
-plt.imshow(img)
+#plt.show(img)
 ```
 
 ####j. Scatter plot
@@ -431,6 +431,73 @@ data = datasets.load_iris()
 # Convert to Pandas dataframe
 iris = pd.DataFrame(data.data, columns=data.feature_names)
 img=plt.scatter(iris['sepal width (cm)'],iris['sepal length (cm)'])
-plt.imshow(img)
+#plt.show(img)
+```
+
+#Read from csv file
+```{r cache=TRUE}
+tendulkar= read.csv("tendulkar.csv",stringsAsFactors = FALSE,na.strings=c(NA,"-"))
+#Dimensions of dataframe
+dim(tendulkar)
+names(tendulkar)
+```
+
+```{python cache=TRUE}
+import pandas as pd
+#Read csv
+tendulkar= pd.read_csv("tendulkar.csv",na_values=["-"])
+print(tendulkar.shape)
+print(tendulkar.columns)
+```
+
+
+```{r cache=TRUE}
+# Remove rows with 'DNB'
+a <- tendulkar$Runs != "DNB"
+tendulkar <- tendulkar[a,]
+dim(tendulkar)
+# Remove rows with 'TDNB'
+b <- tendulkar$Runs != "TDNB"
+tendulkar <- tendulkar[b,]
+
+# Remove rows with absent
+c <- tendulkar$Runs != "absent"
+tendulkar <- tendulkar[c,]
+dim(tendulkar)
+
+# Remove the "* indicating not out
+tendulkar$Runs <- as.numeric(gsub("\\*","",tendulkar$Runs))
+dim(tendulkar)
+# Select only complete rows - complete.cases()
+c <- complete.cases(tendulkar)
+#Subset the rows which are complete
+tendulkar <- tendulkar[c,]
+dim(tendulkar)
+
+```
+
+
+```{python cache=TRUE}
+import pandas as pd
+#Read csv
+tendulkar= pd.read_csv("tendulkar.csv",na_values=["-"])
+print(tendulkar.shape)
+# Remove rows with 'DNB'
+a=tendulkar.Runs !="DNB"
+tendulkar=tendulkar[a]
+print(tendulkar.shape)
+# Remove rows with 'TDNB'
+b=tendulkar.Runs !="TDNB"
+tendulkar=tendulkar[b]
+print(tendulkar.shape)
+# Remove rows with absent
+c= tendulkar.Runs != "absent"
+tendulkar=tendulkar[c]
+print(tendulkar.shape)
+# Remove the "* indicating not out
+tendulkar.Runs= tendulkar.Runs.str.replace(r"[*]","")
+#Select only complete rows - dropna()
+tendulkar=tendulkar.dropna()
+print(tendulkar.shape)
 ```
 

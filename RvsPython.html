@@ -266,10 +266,10 @@ print(map(lambda x,y: x*y,a,b))
 # Exponentiating the elements of a list
 print(map(lambda x: x**2,a))
 </code></pre>
-<pre><code>## &lt;map object at 0x0000000001FBAB70&gt;
-## &lt;map object at 0x0000000001FBA9E8&gt;
-## &lt;map object at 0x0000000001FBAC18&gt;
-## &lt;map object at 0x0000000001FBA9E8&gt;</code></pre>
+<pre><code>## &lt;map object at 0x0000000001F2AB70&gt;
+## &lt;map object at 0x0000000001F2A9E8&gt;
+## &lt;map object at 0x0000000001F2AC18&gt;
+## &lt;map object at 0x0000000001F2A9E8&gt;</code></pre>
 <p>However if we create ndarrays from lists then we can do the element wise addition,subtraction,product, etc. like R. Numpy is really a powerful module with many, many functions for matrix manipulations</p>
 <pre class="python"><code>import numpy as np
 a =[5,2,3,1,7]
@@ -566,12 +566,14 @@ boxplot(iris$lengthOfSepal)</code></pre>
 <p>Matplotlib is a popular package in Python for plots</p>
 <pre class="python"><code>import sklearn as sklearn
 import pandas as pd
+import matplotlib.pyplot as plt
 from sklearn import datasets
 data = datasets.load_iris()
 # Convert to Pandas dataframe
 iris = pd.DataFrame(data.data, columns=data.feature_names)
 import matplotlib.pyplot as plt
-plt.boxplot(iris['sepal length (cm)'])</code></pre>
+img=plt.boxplot(iris['sepal length (cm)'])
+#plt.show(img)</code></pre>
 </div>
 <div id="j.-scatter-plot" class="section level4">
 <h4>j. Scatter plot</h4>
@@ -584,9 +586,80 @@ from sklearn import datasets
 data = datasets.load_iris()
 # Convert to Pandas dataframe
 iris = pd.DataFrame(data.data, columns=data.feature_names)
-plt.scatter(iris['sepal width (cm)'],iris['sepal length (cm)'])</code></pre>
+img=plt.scatter(iris['sepal width (cm)'],iris['sepal length (cm)'])
+#plt.show(img)</code></pre>
 </div>
 </div>
+</div>
+<div id="read-from-csv-file" class="section level1">
+<h1>Read from csv file</h1>
+<pre class="r"><code>tendulkar= read.csv(&quot;tendulkar.csv&quot;,stringsAsFactors = FALSE,na.strings=c(NA,&quot;-&quot;))
+#Dimensions of dataframe
+dim(tendulkar)</code></pre>
+<pre><code>## [1] 347  13</code></pre>
+<pre class="r"><code>names(tendulkar)</code></pre>
+<pre><code>##  [1] &quot;X&quot;          &quot;Runs&quot;       &quot;Mins&quot;       &quot;BF&quot;         &quot;X4s&quot;       
+##  [6] &quot;X6s&quot;        &quot;SR&quot;         &quot;Pos&quot;        &quot;Dismissal&quot;  &quot;Inns&quot;      
+## [11] &quot;Opposition&quot; &quot;Ground&quot;     &quot;Start.Date&quot;</code></pre>
+<pre class="python"><code>import pandas as pd
+#Read csv
+tendulkar= pd.read_csv(&quot;tendulkar.csv&quot;,na_values=[&quot;-&quot;])
+print(tendulkar.shape)
+print(tendulkar.columns)</code></pre>
+<pre><code>## (347, 13)
+## Index(['Unnamed: 0', 'Runs', 'Mins', 'BF', '4s', '6s', 'SR', 'Pos',
+##        'Dismissal', 'Inns', 'Opposition', 'Ground', 'Start Date'],
+##       dtype='object')</code></pre>
+<pre class="r"><code># Remove rows with 'DNB'
+a &lt;- tendulkar$Runs != &quot;DNB&quot;
+tendulkar &lt;- tendulkar[a,]
+dim(tendulkar)</code></pre>
+<pre><code>## [1] 330  13</code></pre>
+<pre class="r"><code># Remove rows with 'TDNB'
+b &lt;- tendulkar$Runs != &quot;TDNB&quot;
+tendulkar &lt;- tendulkar[b,]
+
+# Remove rows with absent
+c &lt;- tendulkar$Runs != &quot;absent&quot;
+tendulkar &lt;- tendulkar[c,]
+dim(tendulkar)</code></pre>
+<pre><code>## [1] 329  13</code></pre>
+<pre class="r"><code># Remove the &quot;* indicating not out
+tendulkar$Runs &lt;- as.numeric(gsub(&quot;\\*&quot;,&quot;&quot;,tendulkar$Runs))
+dim(tendulkar)</code></pre>
+<pre><code>## [1] 329  13</code></pre>
+<pre class="r"><code># Select only complete rows - complete.cases()
+c &lt;- complete.cases(tendulkar)
+#Subset the rows which are complete
+tendulkar &lt;- tendulkar[c,]
+dim(tendulkar)</code></pre>
+<pre><code>## [1] 327  13</code></pre>
+<pre class="python"><code>import pandas as pd
+#Read csv
+tendulkar= pd.read_csv(&quot;tendulkar.csv&quot;,na_values=[&quot;-&quot;])
+print(tendulkar.shape)
+# Remove rows with 'DNB'
+a=tendulkar.Runs !=&quot;DNB&quot;
+tendulkar=tendulkar[a]
+print(tendulkar.shape)
+# Remove rows with 'TDNB'
+b=tendulkar.Runs !=&quot;TDNB&quot;
+tendulkar=tendulkar[b]
+print(tendulkar.shape)
+# Remove rows with absent
+c= tendulkar.Runs != &quot;absent&quot;
+tendulkar=tendulkar[c]
+print(tendulkar.shape)
+# Remove the &quot;* indicating not out
+tendulkar.Runs= tendulkar.Runs.str.replace(r&quot;[*]&quot;,&quot;&quot;)
+#Select only complete rows - dropna()
+tendulkar=tendulkar.dropna()
+print(tendulkar.shape)</code></pre>
+<pre><code>## (347, 13)
+## (330, 13)
+## (329, 13)
+## (329, 13)
+## (327, 13)</code></pre>
 </div>
 
 
