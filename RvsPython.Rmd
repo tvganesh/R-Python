@@ -304,12 +304,14 @@ print(iris.columns)
 ####e. Rename columns
 Assign a vector to column names
 ```{r cache=TRUE}
+#R
 colnames(iris) <- c("lengthOfSepal","widthOfSepal","lengthOfPetal","widthOfPetal","Species")
 colnames(iris)
 ```
 
 In Python we can assign a list to df.columns
 ```{python cache=TRUE}
+#Python
 import sklearn as sklearn
 import pandas as pd
 from sklearn import datasets
@@ -405,6 +407,7 @@ boxplot(iris$lengthOfSepal)
 
 Matplotlib is a popular package in Python for plots
 ```{python cache=TRUE}
+#Python
 import sklearn as sklearn
 import pandas as pd
 import matplotlib.pyplot as plt
@@ -419,10 +422,12 @@ img=plt.boxplot(iris['sepal length (cm)'])
 
 ####j. Scatter plot
 ```{r cache=TRUE}
+#R
 plot(iris$widthOfSepal,iris$lengthOfSepal)
 ```
 
 ```{python cache=TRUE}
+#Python
 import matplotlib.pyplot as plt
 import sklearn as sklearn
 import pandas as pd
@@ -436,6 +441,7 @@ img=plt.scatter(iris['sepal width (cm)'],iris['sepal length (cm)'])
 
 #Read from csv file
 ```{r cache=TRUE}
+#R
 tendulkar= read.csv("tendulkar.csv",stringsAsFactors = FALSE,na.strings=c(NA,"-"))
 #Dimensions of dataframe
 dim(tendulkar)
@@ -443,6 +449,7 @@ names(tendulkar)
 ```
 
 ```{python cache=TRUE}
+#Python
 import pandas as pd
 #Read csv
 tendulkar= pd.read_csv("tendulkar.csv",na_values=["-"])
@@ -452,6 +459,7 @@ print(tendulkar.columns)
 
 
 ```{r cache=TRUE}
+#R
 # Remove rows with 'DNB'
 a <- tendulkar$Runs != "DNB"
 tendulkar <- tendulkar[a,]
@@ -473,12 +481,16 @@ c <- complete.cases(tendulkar)
 #Subset the rows which are complete
 tendulkar <- tendulkar[c,]
 dim(tendulkar)
+# Do some base plotting - Scatter plot
+plot(tendulkar$BF,tendulkar$Runs)
 
 ```
 
 
 ```{python cache=TRUE}
+#Python 
 import pandas as pd
+import matplotlib.pyplot as plt
 #Read csv
 tendulkar= pd.read_csv("tendulkar.csv",na_values=["-"])
 print(tendulkar.shape)
@@ -499,5 +511,45 @@ tendulkar.Runs= tendulkar.Runs.str.replace(r"[*]","")
 #Select only complete rows - dropna()
 tendulkar=tendulkar.dropna()
 print(tendulkar.shape)
+tendulkar.Runs = tendulkar.Runs.astype(int)
+tendulkar.BF = tendulkar.BF.astype(int)
+#Scatter plot
+plt.scatter(tendulkar.BF,tendulkar.Runs)
+```
+
+# Chaining operations on dataframes
+
+```{r cache=TRUE}
+#R
+library(dplyr)
+tendulkar1 <- tendulkar %>% group_by(Ground) %>% summarise(meanRuns= mean(Runs)) %>%
+         arrange(desc(meanRuns))
+head(tendulkar1,10)
+```
+
+```{python }
+#Python
+import pandas as pd
+#Read csv
+tendulkar= pd.read_csv("tendulkar.csv",na_values=["-"])
+print(tendulkar.shape)
+# Remove rows with 'DNB'
+a=tendulkar.Runs !="DNB"
+tendulkar=tendulkar[a]
+# Remove rows with 'TDNB'
+b=tendulkar.Runs !="TDNB"
+tendulkar=tendulkar[b]
+# Remove rows with absent
+c= tendulkar.Runs != "absent"
+tendulkar=tendulkar[c]
+# Remove the "* indicating not out
+tendulkar.Runs= tendulkar.Runs.str.replace(r"[*]","")
+
+#Select only complete rows - dropna()
+tendulkar=tendulkar.dropna()
+tendulkar.Runs = tendulkar.Runs.astype(int)
+tendulkar.BF = tendulkar.BF.astype(int)
+tendulkar1= tendulkar.groupby('Ground').mean()['Runs'].sort_values(ascending=False)
+print(tendulkar1.head(10))
 ```
 
